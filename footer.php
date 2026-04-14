@@ -11,24 +11,18 @@
 
 ?>
 
-	<footer id="colophon" class="site-footer">
-		<div class="site-info">
-			<a href="<?php echo esc_url( __( 'https://wordpress.org/', 'kabeer-ali-aalvi' ) ); ?>">
-				<?php
-				/* translators: %s: CMS name, i.e. WordPress. */
-				printf( esc_html__( 'Proudly powered by %s', 'kabeer-ali-aalvi' ), 'WordPress' );
-				?>
-			</a>
-			<span class="sep"> | </span>
-				<?php
-				/* translators: 1: Theme name, 2: Theme author. */
-				printf( esc_html__( 'Theme: %1$s by %2$s.', 'kabeer-ali-aalvi' ), 'kabeer-ali-aalvi', '<a href="http://underscores.me/">Underscores.me</a>' );
-				?>
-		</div><!-- .site-info -->
-	</footer><!-- #colophon -->
-</div><!-- #page -->
+ <!-- Footer -->
+  <footer style="border-top: 1px solid var(--border); padding: 1.5rem 0;">
+    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+      <span class="text-mono text-faint" style="font-size: 0.8rem;">devfolio © <?php echo date('Y'); ?></span>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#" class="text-sm text-faint">Privacy</a>
+        <a href="#" class="text-sm text-faint">Terms</a>
+        <a href="#" class="text-sm text-faint">Contact</a>
+      </div>
+    </div>
+  </footer>
 
-<?php wp_footer(); ?>
-
+  <?php wp_footer(); ?>
 </body>
 </html>
