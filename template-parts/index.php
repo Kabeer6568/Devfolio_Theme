@@ -1,49 +1,24 @@
 
 
-  <!-- Hero -->
-  <section class="home-hero">
-    <div class="container">
-      <p class="home-hero__eyebrow">// your work, beautifully presented</p>
-      <h1 class="home-hero__title">
-        Build your<br>
-        developer <em>portfolio</em><br>
-        in minutes.
-      </h1>
-      <p class="home-hero__sub">
-        Sign up, fill in your details, and get a clean, shareable portfolio page — no design skills needed.
-      </p>
-      <div class="home-hero__cta">
-        <a href="register.html" class="btn btn--primary">Create your portfolio →</a>
-        <a href="portfolio.html" class="btn btn--outline">See an example</a>
-      </div>
-    </div>
-  </section>
+  
 
   <!-- Features -->
   <section id="features" style="padding: 4rem 0; border-top: 1px solid var(--border);">
     <div class="container">
-      <p class="section-label">// what you get</p>
+      <p class="section-label"><?php the_field('features_label'); ?></p>
       <div class="features-grid">
+        <?php if (have_rows('feature_item')):?>
+
+        <?php while( have_rows('feature_item') ): the_row(); ?>
         <div class="feature-item">
-          <div class="feature-item__num">01</div>
-          <h3 class="feature-item__title">Auto-generated page</h3>
-          <p class="feature-item__desc">Fill in your info once. We build a live, public portfolio URL you can share anywhere.</p>
+          <div class="feature-item__num"><?php the_sub_field('item_no'); ?></div>
+          <h3 class="feature-item__title"><?php the_sub_field('features_title'); ?></h3>
+          <p class="feature-item__desc"><?php the_sub_field('features_description'); ?></p>
         </div>
-        <div class="feature-item">
-          <div class="feature-item__num">02</div>
-          <h3 class="feature-item__title">Project showcase</h3>
-          <p class="feature-item__desc">Add projects with descriptions, tags, and links. Keep them updated any time.</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-item__num">03</div>
-          <h3 class="feature-item__title">Skills & proficiency</h3>
-          <p class="feature-item__desc">Display your tech stack with skill levels. Grouped by category for clarity.</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-item__num">04</div>
-          <h3 class="feature-item__title">Your own URL</h3>
-          <p class="feature-item__desc">Share devfolio.io/u/yourname — a permanent link that's always up to date.</p>
-        </div>
+        <?php endwhile; ?>
+
+        <?php endif; ?>
+        
       </div>
     </div>
   </section>
@@ -72,17 +47,5 @@
     </div>
   </section>
 
-  <!-- CTA Banner -->
-  <section style="padding: 4rem 0; border-top: 1px solid var(--border); background: var(--text);">
-    <div class="container" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 2rem;">
-      <div>
-        <h2 style="font-size: 1.5rem; color: #fff; margin-bottom: 0.5rem;">Ready to build yours?</h2>
-        <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem;">It's free to start. No credit card needed.</p>
-      </div>
-      <a href="register.html" class="btn" style="background: #fff; color: var(--text); border-color: #fff; font-size: 0.875rem; padding: 0.7rem 1.5rem;">
-        Get started for free →
-      </a>
-    </div>
-  </section>
-
+ 
   
