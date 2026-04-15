@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Log in — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="login">
+<?php get_header(); 
+
+/* Template Name: Login Page */
+
+?>
+<body data-page="">
 
   <div class="auth-wrapper">
 
@@ -31,15 +28,16 @@
         </div>
 
         <div class="card">
-          <form id="login-form">
+          <form id="login-form" method="POST">
 
             <div class="form-group">
-              <label class="form-label" for="login-email">Email</label>
+              <label class="form-label" for="login-email">Username</label>
               <input
                 class="form-input"
-                type="email"
+                type="text"
                 id="login-email"
-                placeholder="you@example.com"
+                placeholder="Name"
+                name = "username"
                 autocomplete="email"
               />
             </div>
@@ -53,6 +51,7 @@
                 class="form-input"
                 type="password"
                 id="login-pass"
+                name = "password"
                 placeholder="••••••••"
                 autocomplete="current-password"
               />
@@ -62,7 +61,7 @@
               <a href="#" class="text-xs text-faint" style="text-decoration:underline; text-underline-offset:3px;">Forgot password?</a>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--full">Sign in</button>
+            <button type="submit" name="login_submit" class="btn btn--primary btn--full">Sign in</button>
 
           </form>
 
@@ -79,6 +78,4 @@
 
   </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+  <?php get_footer(); ?>

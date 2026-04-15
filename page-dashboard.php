@@ -1,11 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+<?php
+get_header();
+
+/* Template Name: Dashboard */
+
+?>
+
+
 <body data-page="dashboard">
 
   <!-- Top Navbar -->
@@ -27,7 +27,7 @@
     <aside class="sidebar">
       <div class="sidebar__section">
         <span class="sidebar__label">Main</span>
-        <a href="dashboard.html" class="sidebar__link active">
+        <a href="<?php echo home_url('/dashboard'); ?>" class="sidebar__link active">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           Dashboard
         </a>
@@ -156,6 +156,4 @@
     </main>
   </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+<?php get_footer(); ?>

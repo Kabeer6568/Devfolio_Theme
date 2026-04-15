@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Create Account — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
+<?php get_header();
+
+/* Template Name: Register Page */
+
+?>
 <body data-page="register">
 
   <div class="auth-wrapper">
@@ -121,6 +118,4 @@
 
   </div>
 
-  <script src="main.js"></script>
-</body>
-</html>
+<?php get_footer(); ?>

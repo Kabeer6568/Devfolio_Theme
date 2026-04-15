@@ -117,10 +117,10 @@ function initLogin() {
     btn.disabled = true;
 
     // Simulate auth
-    setTimeout(() => {
-      // Redirect to dashboard
-      window.location.href = 'dashboard.html';
-    }, 1200);
+    form.addEventListener('submit', () => {
+  btn.textContent = 'Signing in...';
+  btn.disabled = true;
+});
   });
 
   // Toggle password visibility

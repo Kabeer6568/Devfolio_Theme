@@ -191,5 +191,11 @@ add_filter('acf/settings/load_json', function($paths) {
 });
 
 
-
+//Load CSS and JS
 require get_template_directory() . '/inc/enqueue.php';
+
+
+//Load Authentication 
+require get_template_directory() . '/inc/auth.php';
+
+
