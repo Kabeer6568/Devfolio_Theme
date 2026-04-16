@@ -25,3 +25,24 @@ function devfolio_handle_login(){
 }
 
 add_action('init' , 'devfolio_handle_login');
+
+
+function devfolio_register_handle(){
+
+    if(!isset($_POST['register_submit'])) return;
+
+    $user_id = wp_create_user(
+        sanitize_text_field($_POST['fullname']),
+        sanitize_email($_POST['email']),
+        sanitize_text_field($_POST['username']),
+        $_POST['password']
+    );
+
+    if(!is_wp_error($user_id)){
+        wp_redirect(home_url('/dashboard'));
+        exit;
+    }
+
+}
+
+add_action('init' , 'devfolio_register_handle');

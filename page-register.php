@@ -3,7 +3,7 @@
 /* Template Name: Register Page */
 
 ?>
-<body data-page="register">
+<body data-page="">
 
   <div class="auth-wrapper">
 
@@ -27,7 +27,7 @@
         </div>
 
         <div class="card">
-          <form id="register-form">
+          <form id="register-form" method="POST">
 
             <div class="form-group">
               <label class="form-label" for="reg-name">Full name</label>
@@ -35,6 +35,7 @@
                 class="form-input"
                 type="text"
                 id="reg-name"
+                name="fullname"
                 placeholder="Jane Smith"
                 autocomplete="name"
               />
@@ -46,6 +47,7 @@
                 class="form-input"
                 type="email"
                 id="reg-email"
+                name="email"
                 placeholder="you@example.com"
                 autocomplete="email"
               />
@@ -59,6 +61,7 @@
                   class="form-input"
                   type="text"
                   id="reg-username"
+                  name="username"
                   placeholder="yourname"
                   style="padding-left: 8.5rem;"
                   autocomplete="username"
@@ -73,6 +76,7 @@
                 class="form-input"
                 type="password"
                 id="reg-pass"
+                name="password"
                 placeholder="Min. 8 characters"
                 autocomplete="new-password"
               />
@@ -102,7 +106,7 @@
               </label>
             </div>
 
-            <button type="submit" class="btn btn--primary btn--full">Create account</button>
+            <button type="submit" name="register_submit" class="btn btn--primary btn--full">Create account</button>
 
           </form>
 
