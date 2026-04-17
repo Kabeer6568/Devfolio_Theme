@@ -1,21 +1,9 @@
-<?php get_header(); 
+<?php get_header('auth'); 
 
 /* Template Name: Login Page */
 
 ?>
-<body data-page="">
 
-  <div class="auth-wrapper">
-
-    <!-- Minimal top bar -->
-    <nav class="navbar">
-      <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-        <ul class="navbar__links">
-          <li><a href="register.html">Don't have an account? <strong>Sign up</strong></a></li>
-        </ul>
-      </div>
-    </nav>
 
     <div class="auth-body">
       <div class="auth-box">

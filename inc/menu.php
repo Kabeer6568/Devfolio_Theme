@@ -5,7 +5,9 @@ function devfolio_menu_handle(){
 
     register_nav_menus( [
     
-        'primary_menu' => __('Home Menu' , 'devfolio'),
+        'primary_menu' => __('Primary Menu' , 'devfolio'),
+        'dashboard_menu' => __('Dashboard Menu', 'devfolio'), 
+        
     
     ]);
 

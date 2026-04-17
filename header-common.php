@@ -20,29 +20,18 @@
 	<?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?> data-page="home">
+<body data-page="">
 
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar__inner">
-      <a href="<?php echo home_url(); ?>" class="navbar__logo">dev<span>folio</span></a>
+      <a href="<?php echo home_url() ?>" class="navbar__logo">dev<span>folio</span></a>
       <ul class="navbar__links">
-        <?php
-		
-			wp_nav_menu( [
-				'theme_location' => 'primary_menu',
-				'container' => false,
-				'items_wrap' => '%3$s',
-        'fallback_cb'    => false,
-			] )
-		
-		?>
-	  	<!-- <li class="nav-hide"><a href="#features">Features</a></li>
-        <li class="nav-hide"><a href="#how">How it works</a></li>
-        <li><a href="login.html">Log in</a></li> -->
-
-        <li><a href="register.html" class="btn btn--primary">Get started</a></li>
-
+        <li><a href="<?php echo home_url('/register') ?>" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
+        <li>
+          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">
+            <?php echo ucfirst(substr(wp_get_current_user()->display_name , 0 , 1)) ?>
+          </div>
+        </li>
       </ul>
     </div>
   </nav>

@@ -7,27 +7,11 @@ if (!is_user_logged_in()) {
 }
 
 
-get_header();
+get_header('dashboard');
 
 /* Template Name: Dashboard */
 
 ?>
-
-
-<body data-page="dashboard">
-
-  <!-- Top Navbar -->
-  <nav class="navbar">
-    <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-      <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
-        <li>
-          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;"><?php echo ucfirst(substr(wp_get_current_user()->display_name , 0 , 1)) ?></div>
-        </li>
-      </ul>
-    </div>
-  </nav>
 
   <div class="dashboard">
 

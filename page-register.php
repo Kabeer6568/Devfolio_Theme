@@ -1,20 +1,9 @@
-<?php get_header();
+<?php get_header('auth');
 
 /* Template Name: Register Page */
 
 ?>
-<body data-page="">
 
-  <div class="auth-wrapper">
-
-    <nav class="navbar">
-      <div class="navbar__inner">
-        <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-        <ul class="navbar__links">
-          <li><a href="login.html">Already have an account? <strong>Log in</strong></a></li>
-        </ul>
-      </div>
-    </nav>
 
     <div class="auth-body">
       <div class="auth-box" style="max-width: 460px;">

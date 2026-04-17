@@ -1,6 +1,6 @@
 <?php
 
-get_header();
+get_header('common');
 
 /* Template Name: Edit Profile */
 
@@ -24,19 +24,7 @@ $social_links = get_user_meta($user_id , 'devfolio_social_links' , true);
 if (!is_array($social_links)) $social_links = [];
 
 ?>
-<body data-page="">
 
-  <nav class="navbar">
-    <div class="navbar__inner">
-      <a href="index.html" class="navbar__logo">dev<span>folio</span></a>
-      <ul class="navbar__links">
-        <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
-        <li>
-          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">J</div>
-        </li>
-      </ul>
-    </div>
-  </nav>
 
   <div class="dashboard">
 
