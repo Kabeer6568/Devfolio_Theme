@@ -1,4 +1,12 @@
 <?php
+
+// PROTECT PAGE
+if (!is_user_logged_in()) {
+    wp_redirect(home_url('/login'));
+    exit;
+}
+
+
 get_header();
 
 /* Template Name: Dashboard */
@@ -15,7 +23,7 @@ get_header();
       <ul class="navbar__links">
         <li><a href="portfolio.html" class="btn btn--outline btn--sm">View portfolio ↗</a></li>
         <li>
-          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;">J</div>
+          <div style="width:28px; height:28px; border-radius:50%; background:var(--text); display:flex; align-items:center; justify-content:center; color:#fff; font-family:var(--font-mono); font-size:0.7rem; cursor:pointer;"><?php echo ucfirst(substr(wp_get_current_user()->display_name , 0 , 1)) ?></div>
         </li>
       </ul>
     </div>
@@ -64,7 +72,7 @@ get_header();
       <div class="page-header">
         <div>
           <h1 class="page-header__title">Dashboard</h1>
-          <p class="page-header__sub">Welcome back, Jane. Here's your portfolio overview.</p>
+          <p class="page-header__sub">Welcome back, <?php echo ucfirst(wp_get_current_user()->display_name) ?>. Here's your portfolio overview.</p>
         </div>
         <a href="portfolio.html" class="btn btn--outline btn--sm" target="_blank">Preview portfolio ↗</a>
       </div>
@@ -94,10 +102,10 @@ get_header();
         <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
           <div>
             <p class="text-xs text-faint text-mono" style="text-transform:uppercase; letter-spacing:0.06em; margin-bottom:0.35rem;">Your portfolio URL</p>
-            <p class="text-mono" style="font-size:0.9rem;">devfolio.io/u/<strong>janesmith</strong></p>
+            <p class="text-mono" style="font-size:0.9rem;">devfolio.io/u/<strong><?php echo esc_html(wp_get_current_user()->user_login); ?></strong></p>
           </div>
           <div style="display:flex; gap:0.5rem;">
-            <button class="btn btn--outline btn--sm" id="copy-link" data-url="https://devfolio.io/u/janesmith">Copy link</button>
+            <button class="btn btn--outline btn--sm" id="copy-link" data-url="https://devfolio.io/u/<?php echo esc_html(wp_get_current_user()->user_login); ?>">Copy link</button>
             <a href="portfolio.html" class="btn btn--primary btn--sm" target="_blank">Open ↗</a>
           </div>
         </div>

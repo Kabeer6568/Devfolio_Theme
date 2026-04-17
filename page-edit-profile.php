@@ -1,12 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edit Profile — DevFolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="edit-profile">
+<?php
+
+get_header();
+
+/* Template Name: Edit Profile */
+
+if ( ! is_user_logged_in() ) {
+    wp_redirect( home_url( '/login' ) );
+    exit;
+}
+
+$user    = wp_get_current_user();
+$user_id = $user->ID;
+
+$fullname     = get_user_meta( $user_id, 'devfolio_fullname', true )    ?: $user->display_name;
+$location     = get_user_meta( $user_id, 'devfolio_location', true );
+$jobtitle     = get_user_meta( $user_id, 'devfolio_jobtitle', true );
+$years_exp    = get_user_meta( $user_id, 'devfolio_years_exp', true );
+$bio          = $user->description;
+
+$social_links = get_user_meta($user_id , 'devfolio_social_links' , true);
+if (!is_array($social_links)) $social_links = [];
+
+?>
+<body data-page="">
 
   <nav class="navbar">
     <div class="navbar__inner">
@@ -66,7 +82,10 @@
         </div>
       </div>
 
-      <form id="profile-form">
+      <form id="profile-form" method="POST" enctype="multipart/form-data">
+
+        <?php wp_nonce_field( 'devfolio_save_profile', 'profile_nonce' ); ?>
+
         <div style="display:grid; grid-template-columns:1fr 2fr; gap:2rem; align-items:start; flex-wrap:wrap;">
 
           <!-- Avatar column -->
@@ -78,7 +97,15 @@
             <p class="text-xs text-faint mb-2">JPG or PNG, max 2MB</p>
             <label class="btn btn--outline btn--sm btn--full" style="cursor:pointer;">
               Upload photo
-              <input type="file" id="avatar-input" accept="image/*" style="display:none;" />
+              <?php
+              
+              $img_id = get_usermeta( $user_id, 'devfolio_profile_img' );
+              if ($img_id) {
+                echo '<img src="' . esc_url( wp_get_attachment_url( $img_id )) . '">' ;
+              }
+              
+              ?>
+              <input type="file" id="avatar-input" name="profile_img" accept="image/*" style="display:none;" />
             </label>
           </div>
 
@@ -86,39 +113,35 @@
           <div class="card">
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
               <div class="form-group">
-                <label class="form-label" for="prof-firstname">First name</label>
-                <input class="form-input" type="text" id="prof-firstname" value="Jane" />
-              </div>
-              <div class="form-group">
-                <label class="form-label" for="prof-lastname">Last name</label>
-                <input class="form-input" type="text" id="prof-lastname" value="Smith" />
+                <label class="form-label" for="prof-firstname">Full name</label>
+                <input class="form-input" type="text" name="fullname" id="prof-firstname" value="Jane" />
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-title">Professional title</label>
-              <input class="form-input" type="text" id="prof-title" value="Full-Stack Developer" placeholder="e.g. Senior Frontend Engineer" />
+              <input class="form-input" type="text" name="jobtitle" id="prof-title" value="Full-Stack Developer" placeholder="e.g. Senior Frontend Engineer" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-location">Location</label>
-              <input class="form-input" type="text" id="prof-location" value="San Francisco, CA" placeholder="City, Country" />
+              <input class="form-input" type="text" name="location" id="prof-location" value="San Francisco, CA" placeholder="City, Country" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-email">Contact email</label>
-              <input class="form-input" type="email" id="prof-email" value="jane@example.com" />
+              <input class="form-input" type="email" name="email" id="prof-email" value="jane@example.com" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-bio">Bio</label>
-              <textarea class="form-textarea" id="prof-bio" rows="4" placeholder="Write a short bio about yourself...">I build fast, thoughtful web applications. Currently focused on React, Node.js, and distributed systems. Open to remote opportunities.</textarea>
+              <textarea class="form-textarea" name="bio" id="prof-bio" rows="4" placeholder="Write a short bio about yourself...">I build fast, thoughtful web applications. Currently focused on React, Node.js, and distributed systems. Open to remote opportunities.</textarea>
               <p class="form-hint">Keep it concise — 2-3 sentences works best.</p>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-experience">Years of experience</label>
-              <input class="form-input" type="number" id="prof-experience" value="4" min="0" max="50" style="max-width:100px;" />
+              <input class="form-input" type="number" name="years_exp" id="prof-experience" value="4" min="0" max="50" style="max-width:100px;" />
             </div>
           </div>
 
@@ -133,20 +156,11 @@
 
           <div id="social-list">
             <div class="flex gap-1 mb-1">
-              <input class="form-input" value="GitHub" style="max-width:140px;" placeholder="Platform" />
-              <input class="form-input" value="https://github.com/janesmith" placeholder="URL" style="flex:1;" />
+              <input class="form-input" name="social_platform[]" value="GitHub" style="max-width:140px;" placeholder="Platform" />
+              <input class="form-input" name="social_link[]" value="https://github.com/janesmith" placeholder="URL" style="flex:1;" />
               <button type="button" class="btn btn--ghost btn--sm remove-social" title="Remove">✕</button>
             </div>
-            <div class="flex gap-1 mb-1">
-              <input class="form-input" value="LinkedIn" style="max-width:140px;" placeholder="Platform" />
-              <input class="form-input" value="https://linkedin.com/in/janesmith" placeholder="URL" style="flex:1;" />
-              <button type="button" class="btn btn--ghost btn--sm remove-social" title="Remove">✕</button>
-            </div>
-            <div class="flex gap-1 mb-1">
-              <input class="form-input" value="Twitter" style="max-width:140px;" placeholder="Platform" />
-              <input class="form-input" value="https://twitter.com/janesmith" placeholder="URL" style="flex:1;" />
-              <button type="button" class="btn btn--ghost btn--sm remove-social" title="Remove">✕</button>
-            </div>
+            
           </div>
         </div>
 
@@ -160,7 +174,15 @@
             </div>
             <label class="btn btn--outline btn--sm" style="cursor:pointer;">
               Replace resume
-              <input type="file" accept=".pdf" style="display:none;" />
+              <?php
+              
+              $resume_id = get_user_meta( $user_id, 'devfolio_resume', true );
+              if ( $resume_id ) {
+                  echo '<p class="text-sm" style="margin-bottom:0.75rem;">Current: <a href="' . esc_url( wp_get_attachment_url( $resume_id ) ) . '" target="_blank">View resume ↗</a></p>';
+              }
+              ?>
+             
+              <input type="file" accept=".pdf" name="resume" style="display:none;" />
             </label>
           </div>
         </div>
@@ -168,14 +190,15 @@
         <!-- Actions -->
         <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
           <a href="dashboard.html" class="btn btn--outline">Cancel</a>
-          <button type="submit" class="btn btn--primary">Save changes</button>
+          <button type="submit" name="submit_profile" class="btn btn--primary">Save changes</button>
         </div>
 
       </form>
 
     </main>
   </div>
+<?php
 
-  <script src="main.js"></script>
-</body>
-</html>
+get_footer();
+
+?>

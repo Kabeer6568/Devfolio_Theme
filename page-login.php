@@ -29,7 +29,8 @@
 
         <div class="card">
           <form id="login-form" method="POST">
-
+            
+            <?php wp_nonce_field( 'devfolio_login', '_wpnonce' ); ?>
             <div class="form-group">
               <label class="form-label" for="login-email">Username</label>
               <input

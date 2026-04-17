@@ -28,7 +28,8 @@
 
         <div class="card">
           <form id="register-form" method="POST">
-
+            
+            <?php wp_nonce_field( 'devfolio_register', '_wpnonce' ); ?>
             <div class="form-group">
               <label class="form-label" for="reg-name">Full name</label>
               <input
