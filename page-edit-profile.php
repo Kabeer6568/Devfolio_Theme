@@ -17,6 +17,8 @@ $location     = get_user_meta( $user_id, 'devfolio_location', true );
 $jobtitle     = get_user_meta( $user_id, 'devfolio_jobtitle', true );
 $years_exp    = get_user_meta( $user_id, 'devfolio_years_exp', true );
 $bio          = $user->description;
+$img_id    = get_user_meta( $user_id, 'devfolio_profile_img', true );
+$resume_id = get_user_meta( $user_id, 'devfolio_resume', true );
 
 $social_links = get_user_meta($user_id , 'devfolio_social_links' , true);
 if (!is_array($social_links)) $social_links = [];
@@ -99,7 +101,7 @@ if (!is_array($social_links)) $social_links = [];
               Upload photo
               <?php
               
-              $img_id = get_usermeta( $user_id, 'devfolio_profile_img' );
+              $img_id = get_user_meta( $user_id, 'devfolio_profile_img' );
               if ($img_id) {
                 echo '<img src="' . esc_url( wp_get_attachment_url( $img_id )) . '">' ;
               }
@@ -114,34 +116,34 @@ if (!is_array($social_links)) $social_links = [];
             <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
               <div class="form-group">
                 <label class="form-label" for="prof-firstname">Full name</label>
-                <input class="form-input" type="text" name="fullname" id="prof-firstname" value="Jane" />
+                <input class="form-input" type="text" name="fullname" id="prof-firstname" value="<?php echo esc_attr( $fullname ); ?>" />
               </div>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-title">Professional title</label>
-              <input class="form-input" type="text" name="jobtitle" id="prof-title" value="Full-Stack Developer" placeholder="e.g. Senior Frontend Engineer" />
+              <input class="form-input" type="text" name="jobtitle" id="prof-title" value="<?php echo esc_attr( $jobtitle ); ?>" placeholder="e.g. Senior Frontend Engineer" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-location">Location</label>
-              <input class="form-input" type="text" name="location" id="prof-location" value="San Francisco, CA" placeholder="City, Country" />
+              <input class="form-input" type="text" name="location" id="prof-location" value="<?php echo esc_attr( $location ); ?>" placeholder="City, Country" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-email">Contact email</label>
-              <input class="form-input" type="email" name="email" id="prof-email" value="jane@example.com" />
+              <input class="form-input" type="email" name="email" id="prof-email" value="<?php echo esc_attr( $user->user_email ); ?>" />
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-bio">Bio</label>
-              <textarea class="form-textarea" name="bio" id="prof-bio" rows="4" placeholder="Write a short bio about yourself...">I build fast, thoughtful web applications. Currently focused on React, Node.js, and distributed systems. Open to remote opportunities.</textarea>
+              <textarea class="form-textarea" name="bio" id="prof-bio" rows="4" placeholder="Write a short bio about yourself..."><?php echo esc_textarea( $bio ); ?></textarea>
               <p class="form-hint">Keep it concise — 2-3 sentences works best.</p>
             </div>
 
             <div class="form-group">
               <label class="form-label" for="prof-experience">Years of experience</label>
-              <input class="form-input" type="number" name="years_exp" id="prof-experience" value="4" min="0" max="50" style="max-width:100px;" />
+              <input class="form-input" type="number" name="years_exp" id="prof-experience" value="<?php echo esc_attr( $years_exp ); ?>" min="0" max="50" style="max-width:100px;" />
             </div>
           </div>
 
@@ -155,11 +157,23 @@ if (!is_array($social_links)) $social_links = [];
           </div>
 
           <div id="social-list">
-            <div class="flex gap-1 mb-1">
-              <input class="form-input" name="social_platform[]" value="GitHub" style="max-width:140px;" placeholder="Platform" />
-              <input class="form-input" name="social_link[]" value="https://github.com/janesmith" placeholder="URL" style="flex:1;" />
-              <button type="button" class="btn btn--ghost btn--sm remove-social" title="Remove">✕</button>
-            </div>
+            <?php if ( empty( $social_links ) ) : ?>
+                        <!-- Default empty row if no links saved yet -->
+                        <div class="social-row" style="display:flex; gap:0.75rem; margin-bottom:0.75rem;">
+                            <input class="form-input" name="social_platform[]" placeholder="Platform (e.g. GitHub)" style="max-width:140px;" />
+                            <input class="form-input" name="social_link[]" placeholder="https://..." style="flex:1;" />
+                            <button type="button" class="btn btn--ghost btn--sm remove-social">✕</button>
+                        </div>
+                    <?php else : ?>
+                        <!-- ✅ Loop through saved social links and pre-fill them -->
+                        <?php foreach ( $social_links as $link ) : ?>
+                            <div class="social-row" style="display:flex; gap:0.75rem; margin-bottom:0.75rem;">
+                                <input class="form-input" name="social_platform[]" value="<?php echo esc_attr( $link['platform'] ); ?>" placeholder="Platform" style="max-width:140px;" />
+                                <input class="form-input" name="social_link[]" value="<?php echo esc_attr( $link['url'] ); ?>" placeholder="https://..." style="flex:1;" />
+                                <button type="button" class="btn btn--ghost btn--sm remove-social">✕</button>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
             
           </div>
         </div>

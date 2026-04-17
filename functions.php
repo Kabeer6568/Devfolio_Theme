@@ -155,6 +155,11 @@ add_action( 'wp_enqueue_scripts', 'kabeer_ali_aalvi_scripts' );
 require get_template_directory() . '/inc/custom-header.php';
 
 /**
+ * Implement the Custom Menu.
+ */
+require get_template_directory() . '/inc/menu.php';
+
+/**
  * Custom template tags for this theme.
  */
 require get_template_directory() . '/inc/template-tags.php';

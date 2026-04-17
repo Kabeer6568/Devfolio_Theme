@@ -43,7 +43,7 @@ function devfolio_register_handle(){
 
     if(is_wp_error($user_id)) return;
 
-    update_user_meta($user_id , 'devfolio_name' , sanitize_text_field( $_POST['fullname']));
+    update_user_meta($user_id , 'devfolio_fullname' , sanitize_text_field( $_POST['fullname']));
 
     wp_update_user([
         'ID'           => $user_id,
@@ -76,8 +76,8 @@ function devfolio_profile_save_handle(){
         
         'ID' => $user_id,
         'display_name' => sanitize_text_field( $_POST['fullname'] ),
-        'user_email' => sanitize_text_field( $_POST['email'] ),
-        'description' => sanitize_text_field( $_POST['bio'] ),
+        'user_email' => sanitize_email( $_POST['email'] ),
+        'description' => sanitize_textarea_field ( $_POST['bio'] ),
 
     ] );
 
@@ -136,7 +136,7 @@ function devfolio_profile_save_handle(){
 
         $allowed_type = ['application/pdf'];
         
-        if (in_array($_FILES['profile_img']['type'] , $allowed_type)) {
+        if (in_array($_FILES['resume']['type'] , $allowed_type)) {
     
         $old_resume = get_user_meta( $user_id, 'devfolio_resume', true );
 
