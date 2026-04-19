@@ -205,6 +205,9 @@ require get_template_directory() . '/inc/auth.php';
 
 
 //Custom Post Tyep Skills 
-require get_template_directory() . '/inc/cpt.php';
+require get_template_directory() . '/inc/skills-cpt.php';
+
+//Custom Post Tyep Projects 
+require get_template_directory() . '/inc/projects-cpt.php';
 
 

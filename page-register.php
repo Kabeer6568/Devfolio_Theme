@@ -2,6 +2,11 @@
 
 /* Template Name: Register Page */
 
+if ( is_user_logged_in() ) {
+    wp_redirect( home_url( '/dashboard' ) );
+    exit;
+}
+
 ?>
 
 
