@@ -20,7 +20,7 @@
 	<?php wp_head(); ?>
 </head>
 
-<body data-page="">
+<body data-page="skills">
 
   <nav class="navbar">
     <div class="navbar__inner">

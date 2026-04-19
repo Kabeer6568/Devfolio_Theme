@@ -204,3 +204,7 @@ require get_template_directory() . '/inc/enqueue.php';
 require get_template_directory() . '/inc/auth.php';
 
 
+//Custom Post Tyep Skills 
+require get_template_directory() . '/inc/cpt.php';
+
+
