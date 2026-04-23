@@ -12,6 +12,30 @@ get_header('dashboard');
 /* Template Name: Dashboard */
 
 get_sidebar();
+
+
+$user = wp_get_current_user();
+
+$years_exp    = get_user_meta( get_current_user_id(), 'devfolio_years_exp', true );
+
+$skills_count = new WP_Query([
+
+  'post_types' => 'skills',
+  'author' => get_current_user_id(),
+  'posts_per_page' => -1,
+  'post_status' => 'publish'
+
+]);
+
+$projects_count = new WP_Query([
+
+  'post_types' => 'projects',
+  'author' => get_current_user_id(),
+  'posts_per_page' => -1,
+  'post_status' => 'publish'
+
+]);
+
 ?>
 
   
@@ -22,7 +46,7 @@ get_sidebar();
       <div class="page-header">
         <div>
           <h1 class="page-header__title">Dashboard</h1>
-          <p class="page-header__sub">Welcome back, <?php echo ucfirst(wp_get_current_user()->display_name) ?>. Here's your portfolio overview.</p>
+          <p class="page-header__sub">Welcome back, <?php echo ucfirst($user->display_name) ?>. Here's your portfolio overview.</p>
         </div>
         <a href="portfolio.html" class="btn btn--outline btn--sm" target="_blank">Preview portfolio ↗</a>
       </div>
@@ -30,11 +54,11 @@ get_sidebar();
       <!-- Stats -->
       <div class="stats-row">
         <div class="stat-card">
-          <div class="stat-card__num" data-count="12">0</div>
+          <div class="stat-card__num" data-count="<?php echo $projects_count->found_posts; ?>">0</div>
           <div class="stat-card__label">Projects</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card__num" data-count="8">0</div>
+          <div class="stat-card__num" data-count="<?php echo $skills_count->found_posts; ?>">0</div>
           <div class="stat-card__label">Skills</div>
         </div>
         <div class="stat-card">
@@ -42,7 +66,7 @@ get_sidebar();
           <div class="stat-card__label">Profile views</div>
         </div>
         <div class="stat-card">
-          <div class="stat-card__num" data-count="4">0</div>
+          <div class="stat-card__num" data-count="<?php echo $years_exp; ?>">0</div>
           <div class="stat-card__label">Yrs experience</div>
         </div>
       </div>

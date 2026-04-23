@@ -30,7 +30,8 @@ function register_skills_post_type() {
         'has_archive'           => true,
         'exclude_from_search'   => false,
         'publicly_queryable'    => true,
-        'capability_type'       => 'post',
+        'capability_type'       => 'skill',
+        'map_meta_cap'    => true,
     );
 
     register_post_type('skills', $args);

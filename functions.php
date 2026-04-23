@@ -211,3 +211,33 @@ require get_template_directory() . '/inc/skills-cpt.php';
 require get_template_directory() . '/inc/projects-cpt.php';
 
 
+function devfolio_restrict_admin_access() {
+
+    if ( is_admin() && current_user_can('subscriber') ) {
+
+        $screen = get_current_screen();
+
+        // Allowed post types only
+        $allowed = ['skills', 'projects'];
+
+        // If they try to access anything other than skills/projects — redirect
+        if ( isset($screen->post_type) && !in_array($screen->post_type, $allowed) ) {
+            wp_redirect( admin_url('edit.php?post_type=skills') );
+            exit;
+        }
+
+        // Block access to all other admin pages
+        $allowed_pages = [
+            'edit.php',        // list
+            'post-new.php',    // add new
+            'post.php',        // edit
+        ];
+
+        global $pagenow;
+        if ( !in_array($pagenow, $allowed_pages) ) {
+            wp_redirect( admin_url('edit.php?post_type=skills') );
+            exit;
+        }
+    }
+}
+add_action('current_screen', 'devfolio_restrict_admin_access');

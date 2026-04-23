@@ -31,7 +31,11 @@ $skills = new WP_Query([
           <h1 class="page-header__title">Skills</h1>
           <p class="page-header__sub">Add technologies and proficiency levels to your portfolio.</p>
         </div>
-        <button class="btn btn--primary" id="add-skill-btn">+ Add skill</button>
+        <button class="btn btn--primary" id="add-skill-btn">
+        <a href="<?php echo admin_url('post-new.php?post_type=skills'); ?>">  
+        + Add skill
+        </a>
+        </button>
       </div>
 
       <!-- Skills list -->
@@ -84,7 +88,11 @@ $skills->the_post();
             <div class="skill-item__bar"><div class="skill-item__fill" data-width="90%" style="width:0%"></div></div>
             <span class="skill-item__pct"><?php echo $percentage; ?></span>
             <span class="tag"><?php echo $field; ?></span>
-            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">✕</button>
+            <button class="btn btn--ghost btn--sm delete-skill" title="Remove">
+              <a href="<?php echo get_delete_post_link(get_the_ID()); ?>">
+                ✕
+              </a>
+            </button>
           </div>
           <?php
           
@@ -104,15 +112,6 @@ endif;
     </main>
   </div>
 
-  <!-- Add Skill Modal -->
-  <div class="modal-overlay" id="skill-modal">
-    <div class="modal">
-      <div class="modal__header">
-        <h2 class="modal__title">Add skill</h2>
-        <button class="btn btn--ghost btn--sm" data-close-modal="skill-modal">✕</button>
-      </div>
-    </div>
-  </div>
 <script>
     // Filter function (inline since it's page-specific UI)
     function filterSkills(category) {

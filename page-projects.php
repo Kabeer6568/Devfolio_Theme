@@ -1,8 +1,7 @@
 <?php
+/* Template Name: Projects */
 
 get_header('common');
-
-/* Template Name: Skills */
 
 if ( ! is_user_logged_in() ) {
     wp_redirect( home_url( '/login' ) );
@@ -29,7 +28,11 @@ $projects = new WP_Query([
           <h1 class="page-header__title">Projects</h1>
           <p class="page-header__sub">Manage the projects displayed on your public portfolio.</p>
         </div>
-        <button class="btn btn--primary" id="add-project-btn">+ Add project</button>
+        <button class="btn btn--primary" id="add-project-btn">
+        <a href="<?php echo admin_url('post-new.php?post_type=projects'); ?>">
+        + Add project
+        </a>
+        </button>
       </div>
 
       <div class="card">
@@ -82,8 +85,16 @@ $projects = new WP_Query([
                
                 <td>
                   <div class="flex gap-1">
-                    <button class="btn btn--outline btn--sm">edit</button>
-                    <button class="btn btn--danger btn--sm delete-project">delete</button>
+                    <button class="btn btn--outline btn--sm">
+                    <a href="<?php echo get_edit_post_link(get_the_ID()); ?>">
+                      edit
+                    </a>
+                    </button>
+                    <button class="btn btn--danger btn--sm delete-project">
+                    <a href="<?php echo get_delete_post_link(get_the_ID()); ?>">
+                      delete
+                    </a>  
+                    </button>
                   </div>
                 </td>
               </tr>
