@@ -2,7 +2,7 @@
 
 get_header('common');
 
-/* Template Name: Skills */
+/* Template Name: My Skills */
 
 if ( ! is_user_logged_in() ) {
     wp_redirect( home_url( '/login' ) );

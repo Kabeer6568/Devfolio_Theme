@@ -20,7 +20,7 @@ $years_exp    = get_user_meta( get_current_user_id(), 'devfolio_years_exp', true
 
 $skills_count = new WP_Query([
 
-  'post_types' => 'skills',
+  'post_type' => 'skills',
   'author' => get_current_user_id(),
   'posts_per_page' => -1,
   'post_status' => 'publish'
@@ -29,7 +29,7 @@ $skills_count = new WP_Query([
 
 $projects_count = new WP_Query([
 
-  'post_types' => 'projects',
+  'post_type' => 'projects',
   'author' => get_current_user_id(),
   'posts_per_page' => -1,
   'post_status' => 'publish'
@@ -115,21 +115,36 @@ $projects_count = new WP_Query([
               </tr>
             </thead>
             <tbody>
+              <?php 
+              
+              if ($projects_count->have_posts()):
+                while ($projects_count->have_posts()) : $projects_count->the_post();
+                $tags = get_the_terms(get_the_ID(), 'project_tags');
+              
+              ?>
               <tr>
-                <td class="text-mono">TaskFlow</td>
-                <td><span class="tag">React</span> <span class="tag">Node.js</span></td>
-                <td><span class="tag tag--accent">published</span></td>
+                <td class="text-mono"><?php the_title() ?></td>
+                <td>
+                <?php if ($tags && !is_wp_error($tags)) :
+                                foreach ($tags as $tag) : ?>   
+                <span class="tag"><?php echo esc_html($tag->name); ?></span>
+                <?php endforeach;
+                            endif; ?>
+                            </td>
+                <td>
+                
+                <span class="tag tag--accent">published</span>
+                
+                </td>
               </tr>
-              <tr>
-                <td class="text-mono">Pricewatch</td>
-                <td><span class="tag">Python</span> <span class="tag">Redis</span></td>
-                <td><span class="tag tag--accent">published</span></td>
-              </tr>
-              <tr>
-                <td class="text-mono">Logcraft</td>
-                <td><span class="tag">TypeScript</span></td>
-                <td><span class="tag">draft</span></td>
-              </tr>
+              <?php
+              
+                endwhile;
+                wp_reset_postdata();
+              endif;
+
+              ?>
+              
             </tbody>
           </table>
         </div>

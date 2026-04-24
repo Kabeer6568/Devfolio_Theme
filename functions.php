@@ -241,3 +241,35 @@ function devfolio_restrict_admin_access() {
     }
 }
 add_action('current_screen', 'devfolio_restrict_admin_access');
+
+
+function devfolio_give_admin_caps() {
+    $admin = get_role('administrator');
+
+    // Skills
+    $admin->add_cap('edit_skill');
+    $admin->add_cap('read_skill');
+    $admin->add_cap('delete_skill');
+    $admin->add_cap('edit_skills');
+    $admin->add_cap('publish_skills');
+    $admin->add_cap('read_private_skills');
+    $admin->add_cap('delete_skills');
+    $admin->add_cap('delete_published_skills');
+    $admin->add_cap('edit_published_skills');
+    $admin->add_cap('edit_others_skills');
+    $admin->add_cap('delete_others_skills');
+
+    // Projects
+    $admin->add_cap('edit_project');
+    $admin->add_cap('read_project');
+    $admin->add_cap('delete_project');
+    $admin->add_cap('edit_projects');
+    $admin->add_cap('publish_projects');
+    $admin->add_cap('read_private_projects');
+    $admin->add_cap('delete_projects');
+    $admin->add_cap('delete_published_projects');
+    $admin->add_cap('edit_published_projects');
+    $admin->add_cap('edit_others_projects');
+    $admin->add_cap('delete_others_projects');
+}
+add_action('init', 'devfolio_give_admin_caps');

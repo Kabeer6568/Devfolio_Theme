@@ -1,5 +1,5 @@
 <?php
-/* Template Name: Projects */
+/* Template Name: My Projects */
 
 get_header('common');
 
