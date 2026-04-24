@@ -80,7 +80,7 @@ $projects_count = new WP_Query([
           </div>
           <div style="display:flex; gap:0.5rem;">
             <button class="btn btn--outline btn--sm" id="copy-link" data-url="https://devfolio.io/u/<?php echo esc_html(wp_get_current_user()->user_login); ?>">Copy link</button>
-            <a href="portfolio.html" class="btn btn--primary btn--sm" target="_blank">Open ↗</a>
+            <a href="<?php echo home_url('/portfolio'); ?>" class="btn btn--primary btn--sm" target="_blank">Open ↗</a>
           </div>
         </div>
       </div>

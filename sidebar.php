@@ -25,7 +25,7 @@
             Edit Profile
         </a>
 
-        <a href="<?php echo home_url('/projects'); ?>" 
+        <a href="<?php echo home_url('/my-projects'); ?>" 
            class="sidebar__link <?php echo is_page('projects') ? 'active' : ''; ?>">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -34,7 +34,7 @@
             Projects
         </a>
 
-        <a href="<?php echo home_url('/skills'); ?>" 
+        <a href="<?php echo home_url('/my-skills'); ?>" 
            class="sidebar__link <?php echo is_page('skills') ? 'active' : ''; ?>">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>

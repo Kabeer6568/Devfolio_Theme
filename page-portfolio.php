@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jane Smith — Developer Portfolio</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body data-page="portfolio">
+<?php
+/* Template Name: My Projects */
 
-  <!-- Minimal portfolio navbar -->
-  <nav class="navbar">
-    <div class="navbar__inner">
-      <span class="navbar__logo">dev<span>folio</span></span>
-      <ul class="navbar__links">
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="register.html" class="btn btn--outline btn--sm">Build yours</a></li>
-      </ul>
-    </div>
-  </nav>
+get_header('portfolio');
+
+?>
 
   <!-- Hero -->
   <section class="portfolio-hero" id="about">
@@ -215,6 +199,8 @@
     </div>
   </footer>
 
-  <script src="main.js"></script>
-</body>
-</html>
+  <?php
+
+  wp_footer();
+  
+  ?>
