@@ -273,3 +273,18 @@ function devfolio_give_admin_caps() {
     $admin->add_cap('delete_others_projects');
 }
 add_action('init', 'devfolio_give_admin_caps');
+
+
+
+// Rewrite Rule
+
+function devfolio_portfolio_rewrite() {
+    add_rewrite_rule(
+        'portfolio/([^/]+)/?$',  // URL pattern
+        'index.php?pagename=portfolio&portfolio_user=$matches[1]',  // What it maps to
+        'top'
+    );
+
+    add_rewrite_tag('%portfolio_user%', '([^/]+)');
+}
+add_action('init', 'devfolio_portfolio_rewrite');
